@@ -1,0 +1,4 @@
+.card-hover:hover{ 
+   box-shadow: 4px 8px 20px grey;
+  -webkit-transition:  box-shadow .2s ease-in;
+} 
