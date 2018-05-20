@@ -43,6 +43,8 @@ if ($user->group_id == 2){
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
+  @yield('style')
+
   <style>
     .fade {
       opacity: 0;
@@ -105,6 +107,7 @@ if ($user->group_id == 2){
 <script src="{{base_url()}}assets/admin/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{base_url()}}assets/admin/dist/js/demo.js"></script>
+<script src="{{base_url('assets/vendor/jquery-loading/')}}dist/loadingoverlay.min.js"></script>
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree()

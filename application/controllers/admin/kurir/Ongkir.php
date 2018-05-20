@@ -11,7 +11,7 @@ class Ongkir extends MY_Controller
 		parent::__construct();
 		$this->_accessable = true;
 		$this->load->helper(array('dump', 'utility'));
-		$this->load->model('ongkir_model');
+		$this->load->model(array('ongkir_model', 'w_provinsi_model', 'w_kabupaten_model', 'w_kecamatan_model', 'kurir_model'));
 	}
 
 	public function index()
@@ -72,18 +72,29 @@ class Ongkir extends MY_Controller
 
 	public function add()
 	{
+		$data['provinsi'] = $this->w_provinsi_model->get_all();
+		$data['kurir'] = $this->kurir_model->get_all();
+		
 		$this->generateCsrf();
-		$this->render('admin/kurir/ongkir/add');
+		$this->render('admin/kurir/ongkir/add', $data);
 	}
 	public function save()
-	{
-		$this->form_validation->set_rules('nama_kurir', 'Nama', 'trim|required|max_length[80]');
+	{ 
+		$this->form_validation->set_rules('id_kecamatan', 'Kecamatan', 'trim|required|max_length[15]');
+		$this->form_validation->set_rules('biaya', 'Biaya', 'trim|required|max_length[5]');
 
 		if ($this->form_validation->run() == false) {
+			$data['provinsi'] = $this->w_provinsi_model->get_all();
+			$data['kurir'] = $this->kurir_model->get_all();
+
 			$this->generateCsrf();
-			$this->render('admin/kurir/ongkir/add');
+			$this->render('admin/kurir/ongkir/add', $data);
 		} else {
-			$data = $this->input->post();
+			$data = array(
+				'id_kurir' => $this->input->post('id_kurir'), 
+				'id_kecamatan' => $this->input->post('id_kecamatan'), 
+				'biaya' => $this->input->post('biaya'),  
+			);
 
 			$insert = $this->ongkir_model->insert($data);
 			if ($insert == false) {
@@ -98,21 +109,35 @@ class Ongkir extends MY_Controller
 	public function edit($id)
 	{
 		$data['data'] = $this->ongkir_model->get($id);
+		$data['provinsi'] = $this->w_provinsi_model->get_all();
+		$data['kurir'] = $this->kurir_model->get_all();
+
+		$kecamatan = $this->w_kecamatan_model->get($data['data']->id_kecamatan);
+		$data['id_kabupaten'] = $kecamatan->regency_id;
+		$kabupaten = $this->w_kabupaten_model->get($data['id_kabupaten']);
+		$data['id_provinsi'] = $kabupaten->province_id;
 
 		$this->generateCsrf();
 		$this->render('admin/kurir/ongkir/edit', $data);
 	}
 	public function update()
 	{
-		$this->form_validation->set_rules('nama_kurir', 'Nama', 'trim|required|max_length[80]');
+		$this->form_validation->set_rules('id_kecamatan', 'Kecamatan', 'trim|required|max_length[15]');
+		$this->form_validation->set_rules('biaya', 'Biaya', 'trim|required|max_length[5]');
 
 		if ($this->form_validation->run() == false) {
 			$data['data'] = $this->input->post();
+			$data['provinsi'] = $this->w_provinsi_model->get_all();
+			$data['kurir'] = $this->kurir_model->get_all();
 
 			$this->generateCsrf();
 			$this->render('admin/kurir/ongkir/edit', $data);
 		} else {
-			$data = $this->input->post();
+			$data = array(
+				'id_kurir' => $this->input->post('id_kurir'), 
+				'id_kecamatan' => $this->input->post('id_kecamatan'), 
+				'biaya' => $this->input->post('biaya'),  
+			); 
 
 			$update = $this->ongkir_model->update($data, $this->input->post('id'));
 			if ($update == false) {
@@ -142,4 +167,55 @@ class Ongkir extends MY_Controller
 		$this->message('Data berhasi di Hapus!', 'success');
 		$this->go('admin/kurir/ongkir');
 	}
+
+	public function show($param = null)
+	{ 
+		if ($param == 'getKabupaten') {
+			$provinsi_id = $_GET['prov_id'];
+			$kab_id = $_GET['kab_id'];
+			$data = $this->w_kabupaten_model->where('province_id', $provinsi_id)->get_all();
+
+			echo '<option value="">== Pilih Kabupaten ==</option>';
+			foreach ($data as $value) {
+				if ($kab_id == $value->id) {
+					echo '<option selected value="' . $value->id . '">' . $value->name . '</option>';
+				} else { 
+					echo '<option value="' . $value->id . '">' . $value->name . '</option>';
+				}
+			}
+			die();
+		} else if ($param == 'getKecamatan') {
+			$kab_id = $_GET['kab_id'];
+			$kec_id = $_GET['kec_id'];
+			$data = $this->w_kecamatan_model->where('regency_id', $kab_id)->get_all();
+
+			echo '<option value="">== Pilih Kecamatan</option>';
+			foreach ($data as $value) {
+				if ($kec_id == $value->id) {
+					echo '<option selected value="' . $value->id . '">' . $value->name . '</option>';
+				} else { 
+					echo '<option value="' . $value->id . '">' . $value->name . '</option>';
+				}
+			}
+			die();
+		} else if ($param == 'getOngkir') {
+			$kec_id = $_GET['kec_id'];
+
+			$data = $this->ongkir_model->with_kurir()->where('id_kecamatan', $kec_id)->get_all();
+
+			if ($data != false) {
+				echo '<option value="">- Pilih Layanan - </option>';
+
+				foreach ($data as $value) {
+					echo '<option value="' . $value->id . '">' . $value->kurir->nama_kurir . ' - ' . rupiah($value->biaya) . '</option>';
+				}
+			} else {
+				echo '<option value="">- Maaf pengiraman belum tersedia untuk daerah anda - </option>';
+			}
+
+			die();
+		}
+	}
+
+
 }
