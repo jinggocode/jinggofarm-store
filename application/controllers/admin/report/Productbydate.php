@@ -31,7 +31,8 @@ class Productbydate extends MY_Controller
 
 			$data = array(
 				'data' => $data, 
-				'date' => $newDateFormat, 
+				'date' => $date, 
+				'newDateFormat' => $newDateFormat, 
 				'total' => $total, 
 				'action' => $this->input->get('action'), 
 				'page' => $this->uri->segment(2),

@@ -22,7 +22,7 @@
         <div class="col-lg-6 col-md-6">
             <form class="form-inline" action="{{site_url('admin/'.$page.'/productbydate/index')}}" method="get">
                 <div class="form-group">
-                    <input name="date" type="text" class="form-control pull-right" id="datepicker" data-date-format='dd-mm-yyyy'>
+                <input value="{{(isset($date))?$date:''}}" name="date" type="text" class="form-control pull-right" id="datepicker" data-date-format='dd-mm-yyyy'>
                 </div>
                 <button type="submit" name="action" value="submit" class="btn btn-info"><i class="fa fa-eye"></i> Lihat</button>
         </div>
@@ -31,9 +31,10 @@
         </div>
     </div>
 
-    <br> @if ($action == "") @else 
+    <br> 
+    @if ($action == "") @else 
     
-<h4>{{dateFormatBulan(4, $date)}}</h4>
+    <h4>{{dateFormatBulan(4, $newDateFormat)}}</h4>
     <div class="box">
         <!-- Table Styles Block -->
         <div class="block">
