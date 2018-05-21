@@ -131,6 +131,10 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
             return $hari[date('w', $tanggal)].', '.$tgl[0] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0] . ' ' . $split_waktu[1];
             break;
 
+            case 4: // Senin, 12 Maret 2017
+            return $hari[date('w', $tanggal)].', '.$tgl[0] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
+            break;
+
             default:
             return $split[2] . ', ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
             break;

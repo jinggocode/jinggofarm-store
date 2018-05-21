@@ -46,4 +46,26 @@ class Report_model extends MY_Model
  
 		return $query->row();
 	}
+
+	// Laporan Produk berdasarkan tanggal
+	public function getDataReportByDate($date = '')
+	{
+		$query = $this->db->query("select id_produk, tb_produk.nama, sum(qty) as jumlah, tb_detail_pembelian.created_at from tb_detail_pembelian
+		JOIN tb_produk ON tb_produk.id = tb_detail_pembelian.id_produk
+		JOIN tb_pembelian ON tb_pembelian.id = tb_detail_pembelian.id_pembelian
+		WHERE tb_pembelian.`status` ='1' or  tb_pembelian.`status` ='2' or  tb_pembelian.`status` ='3'
+		and DATE_FORMAT(tb_pembelian.created_at,'%Y-%m-%d')='$date' group by id_produk");
+
+		return $query->result();
+	} 
+	public function getTotalDataReportByDate($date = '')
+	{
+		$query = $this->db->query("select sum(qty) as total from tb_detail_pembelian
+		JOIN tb_produk ON tb_produk.id = tb_detail_pembelian.id_produk
+		JOIN tb_pembelian ON tb_pembelian.id = tb_detail_pembelian.id_pembelian
+		WHERE tb_pembelian.`status` ='1' or  tb_pembelian.`status` ='2' or  tb_pembelian.`status` ='3'
+		and DATE_FORMAT(tb_pembelian.created_at,'%Y-%m-%d')='$date'");
+
+		return $query->row();
+	}
 }

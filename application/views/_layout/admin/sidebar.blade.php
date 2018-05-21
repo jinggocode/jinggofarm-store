@@ -22,8 +22,20 @@
         <li class="{{($page == 'product')?'active':''}}"><a href="{{site_url('admin/product')}}"><i class="fa fa-tag"></i> <span>Data Produk</span></a></li>
         <li class="{{($page == 'purchase')?'active':''}}"><a href="{{site_url('admin/purchase')}}"><i class="fa fa-shopping-bag"></i> <span>Pembelian</span></a></li>
         <li class="{{($page == 'article')?'active':''}}"><a href="{{site_url('admin/article')}}"><i class="fa fa-newspaper-o"></i> <span>Data Artikel Edukasi</span></a></li>
-        <li class="{{($page == 'user')?'active':''}}"><a href="{{site_url('admin/user')}}"><i class="fa fa-users"></i> <span>Data Admin</span></a></li>
-        <li class="{{($page == 'report')?'active':''}}"><a href="{{site_url('admin/report/profit')}}"><i class="fa fa-file"></i> <span>Laporan Keuntungan</span></a></li>
+        <li class="{{($page == 'user')?'active':''}}"><a href="{{site_url('admin/user')}}"><i class="fa fa-users"></i> <span>Data Admin</span></a></li> 
+        <li class="treeview {{($page == 'report')?'active':''}}">
+          <a href="#">
+            <i class="fa fa-file"></i> <span>laporan</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="{{($sub_page == 'profit')?'active':''}}"><a href="{{site_url('admin/report/profit')}}"><i class="fa fa-circle-o"></i> Keuntungan per Bulan</a></li> 
+            <li class="{{($sub_page == 'productbydate')?'active':''}}"><a href="{{site_url('admin/report/productbydate')}}"><i class="fa fa-circle-o"></i> Produk berdasarkan Tanggal</a></li> 
+            <li class="{{($sub_page == 'productbymonth')?'active':''}}"><a href="{{site_url('admin/report/productbymonth')}}"><i class="fa fa-circle-o"></i> Laporan Produk per Bulan</a></li> 
+          </ul>
+        </li> 
         <li class="treeview {{($page == 'kurir')?'active':''}}">
           <a href="#">
             <i class="fa fa-truck"></i> <span>Data Kurir</span>
