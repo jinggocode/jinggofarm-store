@@ -21,17 +21,7 @@
           </div> 
         </div>
       </div>
-    </div>
-    <div style="background: url({{base_url('assets/image/sapi.jpg')}});" class="item d-flex align-items-center">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 text-white">
-            <h1>Konsumsi Susu di Indonesia</h1>
-            <p class="lead">Jumlah konsumsi susu masyarakat Indonesia masih rendah dibandingkan dengan negara-negara ASEAN..</p><a href="{{site_url('article')}}" class="btn btn-template wide shop-now">Read More<i class="icon-book">  </i></a>
-          </div>
-        </div>
-      </div>
-    </div>
+    </div> 
   </div>
 </section> 
 <!-- Men's Collection -->

@@ -108,6 +108,9 @@ if ($user->group_id == 2){
 <!-- AdminLTE for demo purposes -->
 <script src="{{base_url()}}assets/admin/dist/js/demo.js"></script>
 <script src="{{base_url('assets/vendor/jquery-loading/')}}dist/loadingoverlay.min.js"></script>
+
+@yield('script')
+
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree()

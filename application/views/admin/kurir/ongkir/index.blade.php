@@ -48,7 +48,7 @@
               <thead>
                 <th style="width: 3%">No.</th>
                 <th>Nama Kurir</th> 
-                <th>Provinsi - Kabupaten / Kota - Kecamatan</th> 
+                <th>Kabupaten / Kota - Kecamatan</th> 
                 <th>Biaya</th>   
                 <th>Aksi</th>
               </thead> 
@@ -62,7 +62,7 @@
                   <tr>
                     <td>{{$start++}}.</td> 
                     <td>{{$row->kurir->nama_kurir}}</td>  
-                    <td>{{$row->kecamatan->name}}</td>  
+                    <td>{{$row->kecamatan->kabupaten->name}} - {{$row->kecamatan->name}}</td>  
                     <td>{{money($row->biaya)}}</td>  
                     <td>  
                       <a href="{{site_url('admin/'.$page.'/ongkir/edit/'.$row->id)}}" class="btn btn-warning btn-sm"><i class="fa fa-pencil-square-o"></i> Edit</a>

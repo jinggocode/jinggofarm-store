@@ -39,8 +39,8 @@ class Ongkir extends MY_Controller
 		$config['per_page'] = 10;
 
 		$data = $this->ongkir_model
-			->with_kurir()
-			->with_kecamatan()
+			->with_kurir() 
+			->with_kecamatan(array('with'=>array('relation'=>'kabupaten','fields'=>'name')))
 			->limit($config['per_page'], $offset = $start)
 			->get_all();
 		$config['total_rows'] = $this->ongkir_model
