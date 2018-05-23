@@ -21,22 +21,27 @@ class Product_model extends MY_Model
 		if (count($_GET) > 0) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
 		$config['first_url'] = $config['base_url'].'?'.http_build_query($_GET);
 
-        // Class bootstrap pagination yang digunakan
-        $config['full_tag_open'] = "<ul class='pagination pagination-sm no-margin pull-right'>";
-        $config['full_tag_close'] ="</ul>";
-        $config['num_tag_open'] = '<li>';
-        $config['num_tag_close'] = '</li>';
-        $config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
-        $config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
-        $config['next_tag_open'] = "<li>";
-        $config['next_tagl_close'] = "</li>";
-        $config['prev_tag_open'] = "<li>";
-        $config['prev_tagl_close'] = "</li>";
-        $config['first_tag_open'] = "<li>";
-        $config['first_tagl_close'] = "</li>"; 
-        $config['last_tag_open'] = "<li>";
-        $config['last_tagl_close'] = "</li>"; 
-        $config['per_page'] = 2; 
+        
+		/*Class bootstrap pagination yang digunakan*/
+		$config['first_link'] = 'Awal';
+		$config['last_link'] = 'Akhir';
+		$config['next_link'] = 'Selanjutnya';
+		$config['prev_link'] = 'Sebelumnya';
+		$config['full_tag_open'] = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
+		$config['full_tag_close'] = '</ul></nav></div>';
+		$config['num_tag_open'] = '<li class="page-item"><span class="page-link">';
+		$config['num_tag_close'] = '</span></li>';
+		$config['cur_tag_open'] = '<li class="page-item active"><span class="page-link">';
+		$config['cur_tag_close'] = '<span class="sr-only">(current)</span></span></li>';
+		$config['next_tag_open'] = '<li class="page-item"><span class="page-link">';
+		$config['next_tagl_close'] = '<span aria-hidden="true">&raquo;</span></span></li>';
+		$config['prev_tag_open'] = '<li class="page-item"><span class="page-link">';
+		$config['prev_tagl_close'] = '</span>Next</li>';
+		$config['first_tag_open'] = '<li class="page-item"><span class="page-link">';
+		$config['first_tagl_close'] = '</span></li>';
+		$config['last_tag_open'] = '<li class="page-item"><span class="page-link">';
+		$config['last_tagl_close'] = '</span></li>';
+		$config['per_page'] = 10;
  
         if ($search_data['sort'] == 1) {
         	$sort_by   = 'created_at';

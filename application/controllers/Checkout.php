@@ -83,14 +83,15 @@ class Checkout extends MY_Controller
 	public function proses_detail()
 	{
 		// form validation
-		$this->form_validation->set_rules('nama_penerima', 'Nama', 'trim|required|min_length[3]|max_length[50]');
-		$this->form_validation->set_rules('nomor_hp', 'Nomor Telepon', 'trim|required|min_length[3]|max_length[13]');
+		$this->form_validation->set_rules('first_name', 'Nama', 'trim|required|min_length[3]|max_length[50]');
+		$this->form_validation->set_rules('phone', 'Nomor Telepon', 'trim|required|min_length[3]|max_length[13]');
 		$this->form_validation->set_rules('email', 'Email', 'trim|min_length[3]|max_length[50]');
 		$this->form_validation->set_rules('detail_alamat', 'Alamat Lengkap', 'trim|required|min_length[1]|max_length[255]');
 		$this->form_validation->set_rules('catatan', 'Catatan Pelanggan', 'trim|required|min_length[1]|max_length[255]');
 
 		if ($this->form_validation->run() == FALSE) {
 			$data['cart'] 	  = $this->cart->contents();
+			$data['provinsi'] = $this->checkout_model->getProvinsi();
 
 			$this->generateCsrf();
 			$this->render('checkout/address', $data);

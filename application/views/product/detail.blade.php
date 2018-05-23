@@ -100,7 +100,7 @@
                     @foreach ($testimoni as $value)
                     <tr>
                       <td style="width: 30%"><b>{{$value->nama_pelanggan}}</b></td>
-                      <td>{{$value->ulasan}}</td>
+                      <td>{{$value->ulasan_cepat}}, {{$value->ulasan}}</td>
                     </tr>
                     @endforeach
                 <?php endif ?>
@@ -143,7 +143,7 @@
         <!-- item-->
         @foreach ($produk_lainnya as $row)
         <div class="item col-lg-3">
-            <div class="card card-hover" style="width: 18rem; cursor: pointer;" onclick="window.location.href='{{site_url('product/detail/'.$row->id.'/'.$row->slug)}}'">
+            <div class="card card-hover" style="  cursor: pointer;" onclick="window.location.href='{{site_url('product/detail/'.$row->id.'/'.$row->slug)}}'">
               <img class="card-img-top" src="{{base_url('uploads/product/'.$row->foto)}}" alt="Card image cap">
               <div class="card-body">
                 <label style="font-size: 13px; margin-bottom: -2px">{{$row->kategori->nama}}</label>

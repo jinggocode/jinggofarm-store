@@ -47,7 +47,8 @@
                     <div class="d-flex align-items-center"><img src="{{base_url('uploads/product/'.$value->product->foto)}}" class="img-fluid">
                       <div class="title">
                         <a><h5>{{$value->product->nama}}</h5></a> <br>
-                        {{($pembelian->status == '3' && $value->status_testimoni == '0')?'<a id="testimoni" data-id="'.$value->id.'" data-id_produk="'.$value->product->id.'" data-name="'.$value->product->nama.'" class="btn btn-light text-white btn-sm" data-toggle="modal" data-target=".bd-testimoniModal"><i class="fa fa-pencil-square"></i> Beri Testimoni</a>':'<span class="badge badge-light"><i class="fa fa-check"></i> Sudah diulas</span>'}}
+                        {{($pembelian->status == '3' && $value->status_testimoni == '0')?'<a id="testimoni" data-id="'.$value->id.'" data-id_produk="'.$value->product->id.'" data-name="'.$value->product->nama.'" class="btn btn-light text-white btn-sm" data-toggle="modal" data-target=".bd-testimoniModal"><i class="fa fa-pencil-square"></i> Beri Testimoni</a>':''}}
+                        {{($value->status_testimoni == '1')?'<span class="badge badge-light"><i class="fa fa-check"></i> Sudah diulas</span>':' '}}
                       </div>
                     </div>
                   </div>
@@ -109,7 +110,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <p>Silahkan berikan ulasan mengenai produk <b><span id="nama"></span></b> yang anda beli!</p>
+          <p align="center">Silahkan berikan ulasan mengenai produk <b><span id="nama"></span></b> yang anda beli!</p>
           <form action="{{site_url('purchase/testimoni')}}" method="post">
             {{$csrf}}
             <input type="hidden" name="id" id="id" value="">
@@ -117,6 +118,24 @@
             <input type="hidden" name="id_pembelian" value="{{$pembelian->id}}">
             <input type="hidden" name="nama_pelanggan" value="{{$pembelian->nama_penerima}}">
 
+            <div class="form-check">
+              <input name="ulasan_cepat" class="form-check-input" type="radio" value="Kualitas Produk Sangat Baik" name="ulasan_cepat" id="0">
+              <label class="form-check-label" for="0">
+                Kualitas Produk Sangat Baik
+              </label>
+            </div>
+            <div class="form-check">
+              <input name="ulasan_cepat" class="form-check-input" type="radio" value="Harga sangat bersahabat" name="ulasan_cepat" id="1">
+              <label class="form-check-label" for="1">
+                Harga sangat bersahabat
+              </label>
+            </div>
+            <div class="form-check mb-4">
+              <input name="ulasan_cepat" class="form-check-input" type="radio" value="Pengiriman & respon penjual sangat baik" name="ulasan_cepat" id="2">
+              <label class="form-check-label" for="2">
+                Pengiriman & respon penjual sangat baik
+              </label>
+            </div>
             <div class="form-group">
               <textarea name="ulasan" rows="8" cols="80" class="form-control" placeholder="Isi Ulasan"></textarea>
             </div>
