@@ -137,7 +137,7 @@
               </label>
             </div>
             <div class="form-group">
-              <textarea name="ulasan" rows="8" cols="80" class="form-control" placeholder="Isi Ulasan"></textarea>
+              <textarea id="ulasan"name="ulasan" rows="8" cols="80" class="form-control" placeholder="Isi Ulasan" required></textarea>
             </div>
 
         </div>
@@ -204,6 +204,15 @@ $(document).on('click','#testimoni',function(){
           swal(tipe, pesan, icon);
         }
         window.onload = sweet;
+
+      $("input:radio").click(function() {
+        //var selectedId = $(this).parent().parent().attr('id');//Remove from here 
+        var value_radio = $('input[name=ulasan_cepat]:checked').val(); 
+        $('textarea').val(function(){
+            return $(this).prop('defaultValue') + ' '+value_radio;
+        });
+         
+      });
     });
 </script>
 @endsection

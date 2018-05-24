@@ -144,7 +144,7 @@
                   <td>{{$no++}}.</td>
                   <td>{{$val->nama_rek}}</td>
                   <td>{{$val->no_rek}}</td>
-                  <td><a href="" class="btn btn-warning btn-sm"><i class="fa fa-file-image-o"></i> Foto</a></td>
+                  <td><a target="_blank" href="{{site_url('uploads/bukti-transfer/'.$val->foto)}}" class="btn btn-warning btn-sm"><i class="fa fa-file-image-o"></i> Foto</a></td>
                   <td>
                     <a href="{{site_url('admin/purchase/valid/'.$val->id)}}" class="btn btn-primary btn-sm" onclick="return confirm('Apakah anda yakin?');"><i class="fa fa-check-circle-o"></i> Valid</a>
                     <a href="{{site_url('admin/purchase/unvalid/'.$val->id)}}" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin?');"><i class="fa fa-times-circle"></i> Tidak Valid</a>

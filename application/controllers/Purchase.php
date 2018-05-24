@@ -62,8 +62,7 @@ class Purchase extends MY_Controller
 	{
 		$data['id_produk'] = $this->input->post('id_produk');
 		$data['ulasan'] = $this->input->post('ulasan');
-		$data['nama_pelanggan'] = $this->input->post('nama_pelanggan');
-		$data['ulasan_cepat'] = $this->input->post('ulasan_cepat');
+		$data['nama_pelanggan'] = $this->input->post('nama_pelanggan'); 
 
 		$this->testimoni_model->insert($data);
 

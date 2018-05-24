@@ -1,16 +1,16 @@
 <?php
 
 /**
-*
-*/
+ *
+ */
 class Purchase extends MY_Controller
 {
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->_accessable = TRUE;
-		$this->load->helper(array('dump','utility'));
+		$this->_accessable = true;
+		$this->load->helper(array('dump', 'utility'));
 		$this->root_view = "admin/";
 		$this->load->model('admin/purchase_model');
 		$this->load->model('admin/category_model');
@@ -29,7 +29,7 @@ class Purchase extends MY_Controller
 
 		// Class bootstrap pagination yang digunakan
 		$config['full_tag_open'] = "<ul class='pagination pagination-sm no-margin pull-right'>";
-		$config['full_tag_close'] ="</ul>";
+		$config['full_tag_close'] = "</ul>";
 		$config['num_tag_open'] = '<li>';
 		$config['num_tag_close'] = '</li>';
 		$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
@@ -45,15 +45,19 @@ class Purchase extends MY_Controller
 		$config['per_page'] = 10;
 
 		$data = $this->purchase_model
-		->with_user()
-		->where('status','not like', '1')
-		->where('status','not like', '0')
-		->where('status','not like', '4')
-		->limit($config['per_page'],$offset=$start)
-		->get_all();
+			->with_user()
+			->where('status', 'not like', '1')
+			->where('status', 'not like', '0')
+			->where('status', 'not like', '4') 
+			->order_by('status', 'ASC')
+			->limit($config['per_page'], $offset = $start)
+			->get_all();
 
 		$config['total_rows'] = $this->purchase_model
-		->count_rows();
+			->where('status', 'not like', '1')
+			->where('status', 'not like', '0')
+			->where('status', 'not like', '4')
+			->count_rows();
 
 		$this->load->library('pagination');
 		$this->pagination->initialize($config);
@@ -84,7 +88,7 @@ class Purchase extends MY_Controller
 
 	public function kirim_resi()
 	{
-		$data['no_resi'] 	= $this->input->post('no_resi');
+		$data['no_resi'] = $this->input->post('no_resi');
 		$data['status'] = '3';
 		$this->purchase_model->update($data, $this->input->post('id'));
 
@@ -128,7 +132,7 @@ class Purchase extends MY_Controller
 		$this->go('admin/purchase'); //redirect ke purchase
 	}
 
-	public function delete($id='')
+	public function delete($id = '')
 	{
 		if (!isset($id)) {
 			show_404();

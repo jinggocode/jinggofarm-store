@@ -102,8 +102,8 @@ class Checkout extends MY_Controller
 
 			$data_pembelian = array(
 				'id_user' => $id_user,
-				'nama_penerima' => $this->input->post('nama_penerima'),
-				'nomor_hp' => $this->input->post('nomor_hp'),
+				'nama_penerima' => $this->input->post('first_name'),
+				'nomor_hp' => $this->input->post('phone'),
 				'email' => $this->input->post('email'),
 				'kode_pembelian' => $this->checkout_model->kode_pembelian(),
 				'biaya_kirim' => $biaya_kirim[1],

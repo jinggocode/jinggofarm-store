@@ -96,7 +96,7 @@
                     @foreach ($testimoni as $value)
                     <tr>
                       <td style="width: 30%"><b>{{$value->nama_pelanggan}}</b></td>
-                      <td>{{$value->ulasan_cepat}}, {{$value->ulasan}}</td>
+                      <td>{{$value->ulasan}}</td>
                     </tr>
                     @endforeach
                 <?php endif ?>

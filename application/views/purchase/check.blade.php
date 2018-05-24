@@ -40,7 +40,6 @@ $(document).ready(function(){
           csrf_test_name: $.cookie('csrf_cookie_name')
       }
   }); 
-
 }); 
 </script>
 @endsection
