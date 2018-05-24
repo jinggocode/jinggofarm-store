@@ -30,13 +30,9 @@
             <div class="ribbon-primary text-uppercase">Tersedia</div>
         @endif
 
-        <div data-slider-id="1" class="owl-carousel items-slider owl-drag" style="padding: 0px">
-          <div class="item"><img src="{{base_url('uploads/product/'.$data->foto)}}" alt="shirt"></div>
-          <div class="item"><img src="{{base_url('uploads/product/'.$data->foto)}}" alt="shirt"></div>
-        </div>
-        <div data-slider-id="1" class="owl-thumbs d-flex align-items-center justify-content-center">
-          <button class="owl-thumb-item"><img src="{{base_url('uploads/product/'.$data->foto)}}" alt="shirt"></button> 
-        </div>
+        <div class="items-slider" style="padding: 0px">
+          <div class="item"><img src="{{base_url('uploads/product/'.$data->foto)}}" alt="shirt"></div> 
+        </div> 
       </div>
       <div class="details col-lg-8">
         <div class="d-flex align-items-center justify-content-between flex-column flex-sm-row mb-4">

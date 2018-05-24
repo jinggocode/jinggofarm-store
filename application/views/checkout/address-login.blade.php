@@ -51,11 +51,11 @@
                     </div>
                     <div class="form-group col-md-6">
                       <label for="nama_penerima" class="form-label">Nama Penerima</label>
-                      <input required="required" value="{{$user->first_name}}" id="nama_penerima" type="text" name="nama_penerima" placeholder="Masukkan nama anda" class="form-control">
+                      <input required="required" value="{{$user->first_name}}" id="nama_penerima" type="text" name="first_name" placeholder="Masukkan nama anda" class="form-control">
                     </div>
                     <div class="form-group col-md-6">
-                      <label for="nomor_hp" class="form-label">Nomor Telepon Penerima</label>
-                      <input required="required" value="{{$user->phone}}" id="nomor_hp" type="text" name="nomor_hp" placeholder="Nomor Telepon" class="form-control">
+                      <label for="phone" class="form-label">Nomor Telepon Penerima</label>
+                      <input required="required" value="{{$user->phone}}" id="phone" type="text" name="phone" placeholder="Nomor Telepon" class="form-control">
                     </div>
 
                     <div class="form-group col-md-12 pl-4 ml-2 pt-3">
