@@ -4,7 +4,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="{{base_url()}}assets/admin/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="{{base_url()}}assets/image/user.png" class="img-circle" alt="User Image">
         </div>
         <?php $user = $this->ion_auth->user()->row(); ?>
         <div class="pull-left info">
@@ -32,8 +32,7 @@
           </a>
           <ul class="treeview-menu">
             <li class="{{($sub_page == 'profit')?'active':''}}"><a href="{{site_url('admin/report/profit')}}"><i class="fa fa-circle-o"></i> Keuntungan per Bulan</a></li> 
-            <li class="{{($sub_page == 'productbydate')?'active':''}}"><a href="{{site_url('admin/report/productbydate')}}"><i class="fa fa-circle-o"></i> Produk berdasarkan Tanggal</a></li> 
-            <li class="{{($sub_page == 'productbymonth')?'active':''}}"><a href="{{site_url('admin/report/productbymonth')}}"><i class="fa fa-circle-o"></i> Laporan Produk per Bulan</a></li> 
+            <li class="{{($sub_page == 'product')?'active':''}}"><a href="{{site_url('admin/report/product')}}"><i class="fa fa-circle-o"></i> Produk  </a></li>  
           </ul>
         </li> 
         <li class="treeview {{($page == 'kurir')?'active':''}}">

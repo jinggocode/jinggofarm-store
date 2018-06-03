@@ -48,22 +48,30 @@ class Report_model extends MY_Model
 	}
 
 	// Laporan Produk berdasarkan tanggal
-	public function getDataReportByDate($date = '')
+	public function getDataReportByDate($date = '', $category)
 	{ 
-		$query = $this->db->query("select id_produk, tb_produk.nama, sum(qty) as jumlah, tb_detail_pembelian.created_at from tb_detail_pembelian
-		JOIN tb_produk ON tb_produk.id = tb_detail_pembelian.id_produk
-		JOIN tb_pembelian ON tb_pembelian.id = tb_detail_pembelian.id_pembelian
-		WHERE (tb_pembelian.`status` ='1' or  tb_pembelian.`status` ='2' or  tb_pembelian.`status` ='3')
-		and DATE_FORMAT(tb_pembelian.created_at,'%Y-%m-%d')='$date' group by id_produk order by jumlah DESC");
+		if ($category == 0) {
+			$query = $this->db->query("select id_produk, tb_produk.nama, sum(qty) as jumlah, tb_detail_pembelian.created_at from tb_detail_pembelian
+			JOIN tb_produk ON tb_produk.id = tb_detail_pembelian.id_produk
+			JOIN tb_pembelian ON tb_pembelian.id = tb_detail_pembelian.id_pembelian
+			WHERE (tb_pembelian.`status` ='1' or  tb_pembelian.`status` ='2' or  tb_pembelian.`status` ='3')
+			and DATE_FORMAT(tb_pembelian.created_at,'%Y-%m-%d')='$date' group by id_produk order by jumlah DESC");
+		} else {
+			$query = $this->db->query("select id_produk, tb_produk.nama, sum(qty) as jumlah, tb_detail_pembelian.created_at from tb_detail_pembelian
+			JOIN tb_produk ON tb_produk.id = tb_detail_pembelian.id_produk
+			JOIN tb_pembelian ON tb_pembelian.id = tb_detail_pembelian.id_pembelian
+			WHERE (tb_pembelian.`status` ='1' or  tb_pembelian.`status` ='2' or  tb_pembelian.`status` ='3') and tb_produk.id_kategori = $category
+			and DATE_FORMAT(tb_pembelian.created_at,'%Y-%m-%d')='$date' group by id_produk order by jumlah DESC");
+		}
 
 		return $query->result();
 	} 
-	public function getTotalDataReportByDate($date = '')
+	public function getTotalDataReportByDate($date = '', $category)
 	{
 		$query = $this->db->query("select sum(qty) as total from tb_detail_pembelian
 		JOIN tb_produk ON tb_produk.id = tb_detail_pembelian.id_produk
 		JOIN tb_pembelian ON tb_pembelian.id = tb_detail_pembelian.id_pembelian
-		WHERE (tb_pembelian.`status` ='1' or  tb_pembelian.`status` ='2' or  tb_pembelian.`status` ='3')
+		WHERE (tb_pembelian.`status` ='1' or  tb_pembelian.`status` ='2' or  tb_pembelian.`status` ='3') and tb_produk.id_kategori = $category
 		and DATE_FORMAT(tb_pembelian.created_at,'%Y-%m-%d')='$date'");
 
 		return $query->row();
