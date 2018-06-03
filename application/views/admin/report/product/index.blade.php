@@ -37,7 +37,7 @@
             </form>
         </div>
         <div class="col-lg-6 col-md-6" align="right">
-            <a href="" class="btn btn-primary"><i class="fa fa-print"></i> Cetak</a>
+            <a href="{{site_url('admin/report/product/cetak?category='.$category_select.'&date='.$date)}}" target="_BLANK" class="btn btn-primary"><i class="fa fa-print"></i> Cetak</a>
         </div>
     </div>
 

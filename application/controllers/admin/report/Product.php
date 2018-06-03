@@ -63,4 +63,49 @@ class Product extends MY_Controller
 		$this->generateCsrf();
 		$this->render('admin/cattle/index', $data);
 	} 
+
+	public function cetak()
+	{
+		$this->load->library('html2pdf');
+
+		$date = $this->input->get('date');
+		$category = $this->input->get('category');
+
+		$newDateFormat = date('Y-m-d', strtotime($date)); 
+		
+		$data['data'] = $this->report_model
+			->getDataReportByDate($newDateFormat, $category);
+		$data['total'] = $this->report_model
+			->getTotalDataReportByDate($newDateFormat, $category); 
+		$data['newDateFormat'] = $newDateFormat;
+		
+		$category_product = $this->category_model->get($category);
+
+		if ($category_product == FALSE) {
+			$data['category'] = 'Semua Kategori';
+		} else {
+			$data['category'] = 'Kategori '.$category_product->nama;
+		}
+
+		// generate nama laporan
+		$filename = 'Laporan Produk '.date("Y_m_d-His"); 
+		
+		// configurasi html2pdf
+		$this->html2pdf->folder('./report/product/');
+		//Set the filename to save/download as
+		$this->html2pdf->filename($filename);
+		//Set the paper defaults
+		$this->html2pdf->paper('a4', 'portrait');
+		
+		//Load html view
+		$this->html2pdf->html($this->load->view('admin/report/product/cetak_pdf', $data, true));
+		// dump('asd');
+		if($path = $this->html2pdf->create('save')) {
+			//PDF was successfully saved or downloaded
+			// echo 'PDF saved to: ' . $path;
+			// $this->load->view('pdf', $data);
+			$this->go($path);
+			
+		};
+	}
 }
