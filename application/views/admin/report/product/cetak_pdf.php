@@ -48,13 +48,14 @@ table,th,td { border:1px solid black; border-collapse:collapse; } th,td { paddin
 
 <h1>Laporan Produk </h1>
 
-<p><b><?php echo $category; ?></b> <?php echo dateFormatBulan(4, $newDateFormat) ?></p>
+<p><b><?php echo $category; ?></b> <?php echo dateFormatBulan(4, $date_start) ?> sampai <?php echo dateFormatBulan(4, $date_end) ?></p>
 
 <table width="100%">
 	<tr align="center" style="font-size: 19px; font-weight: 900; ">
 		<td style="width: 5%">No.</td>
 		<td style="width: 80%">Nama Produk</td>
 		<td>Jumlah Terjual</td>
+		<td>Keuntungan</td>
 	</tr>
 
 	<?php $no = 1; foreach($data as $value) {  ?>
@@ -62,12 +63,13 @@ table,th,td { border:1px solid black; border-collapse:collapse; } th,td { paddin
 		<td align="center"><?php echo $no++; ?>.</td>
 		<td><?php echo $value->nama; ?></td>
 		<td align="center"><?php echo $value->jumlah ?></td>
+		<td align="center"><?php echo money($value->profit) ?></td>
 	</tr>
 	<?php } ?>
 
 	<tr>
-		<td colspan="2" style="font-size: 16px; font-weight: 900;" align="right">TOTAL PENJUALAN</td>
-		<td align="center"><b><?php echo $total->total; ?></b></td>
+		<td colspan="3" style="font-size: 16px; font-weight: 900;" align="right">TOTAL KEUNTUNGAN</td>
+		<td align="center"><b><?php echo money($total_profit); ?></b></td>
 	</tr>
 </table>
 

@@ -48,31 +48,67 @@ class Report_model extends MY_Model
 	}
 
 	// Laporan Produk berdasarkan tanggal
-	public function getDataReportByDate($date = '', $category)
+	public function getDataReportByDate($date_start, $date_end, $category)
 	{ 
 		if ($category == 0) {
-			$query = $this->db->query("select id_produk, tb_produk.nama, sum(qty) as jumlah, tb_detail_pembelian.created_at from tb_detail_pembelian
+			$query = $this->db->query("select id_produk, tb_produk.nama, sum(qty) as jumlah, tb_detail_pembelian.created_at,  
+			sum(qty*harga_produksi) as biaya_produksi,  
+			sum(qty*harga_jual) as biaya_jual, sum(qty*harga_jual) - sum(qty*harga_produksi) as profit from tb_detail_pembelian
 			JOIN tb_produk ON tb_produk.id = tb_detail_pembelian.id_produk
 			JOIN tb_pembelian ON tb_pembelian.id = tb_detail_pembelian.id_pembelian
 			WHERE (tb_pembelian.`status` ='1' or  tb_pembelian.`status` ='2' or  tb_pembelian.`status` ='3')
-			and DATE_FORMAT(tb_pembelian.created_at,'%Y-%m-%d')='$date' group by id_produk order by jumlah DESC");
-		} else {
-			$query = $this->db->query("select id_produk, tb_produk.nama, sum(qty) as jumlah, tb_detail_pembelian.created_at from tb_detail_pembelian
+			and (DATE_FORMAT(tb_pembelian.created_at,'%Y-%m-%d') >= '$date_start' and DATE_FORMAT(tb_pembelian.created_at,'%Y-%m-%d') <= '$date_end') group by id_produk order by jumlah DESC");
+		} else { 
+			$query = $this->db->query("select id_produk, tb_produk.nama, sum(qty) as jumlah, tb_detail_pembelian.created_at,  
+			sum(qty*harga_produksi) as biaya_produksi,  
+			sum(qty*harga_jual) as biaya_jual, sum(qty*harga_jual) - sum(qty*harga_produksi) as profit from tb_detail_pembelian
 			JOIN tb_produk ON tb_produk.id = tb_detail_pembelian.id_produk
 			JOIN tb_pembelian ON tb_pembelian.id = tb_detail_pembelian.id_pembelian
 			WHERE (tb_pembelian.`status` ='1' or  tb_pembelian.`status` ='2' or  tb_pembelian.`status` ='3') and tb_produk.id_kategori = $category
-			and DATE_FORMAT(tb_pembelian.created_at,'%Y-%m-%d')='$date' group by id_produk order by jumlah DESC");
+			and (DATE_FORMAT(tb_pembelian.created_at,'%Y-%m-%d') >= '$date_start' and DATE_FORMAT(tb_pembelian.created_at,'%Y-%m-%d') <= '$date_end') group by id_produk order by jumlah DESC");
 		}
 
 		return $query->result();
 	} 
-	public function getTotalDataReportByDate($date = '', $category)
+	public function getTotalDataReportByDate($date_start, $date_end, $category)
 	{
-		$query = $this->db->query("select sum(qty) as total from tb_detail_pembelian
-		JOIN tb_produk ON tb_produk.id = tb_detail_pembelian.id_produk
-		JOIN tb_pembelian ON tb_pembelian.id = tb_detail_pembelian.id_pembelian
-		WHERE (tb_pembelian.`status` ='1' or  tb_pembelian.`status` ='2' or  tb_pembelian.`status` ='3') and tb_produk.id_kategori = $category
-		and DATE_FORMAT(tb_pembelian.created_at,'%Y-%m-%d')='$date'");
+		if ($category == 0) {
+			$query = $this->db->query("select sum(qty) as total from tb_detail_pembelian
+			JOIN tb_produk ON tb_produk.id = tb_detail_pembelian.id_produk
+			JOIN tb_pembelian ON tb_pembelian.id = tb_detail_pembelian.id_pembelian
+			WHERE (tb_pembelian.`status` ='1' or  tb_pembelian.`status` ='2' or  tb_pembelian.`status` ='3')	and (DATE_FORMAT(tb_pembelian.created_at,'%Y-%m-%d') >= '$date_start' and DATE_FORMAT(tb_pembelian.created_at,'%Y-%m-%d') <= '$date_end')");
+		} else {
+			$query = $this->db->query("select sum(qty) as total from tb_detail_pembelian
+			JOIN tb_produk ON tb_produk.id = tb_detail_pembelian.id_produk
+			JOIN tb_pembelian ON tb_pembelian.id = tb_detail_pembelian.id_pembelian
+			WHERE (tb_pembelian.`status` ='1' or  tb_pembelian.`status` ='2' or  tb_pembelian.`status` ='3') and tb_produk.id_kategori = $category
+			and (DATE_FORMAT(tb_pembelian.created_at,'%Y-%m-%d') >= '$date_start' and DATE_FORMAT(tb_pembelian.created_at,'%Y-%m-%d') <= '$date_end')"); 
+		}
+
+		return $query->row();
+	}
+	public function getTotalProfitReportByDate($date_start, $date_end, $category)
+	{
+		if ($category == 0) {
+			$query = $this->db->query("select
+			sum(qty*harga_produksi) as biaya_produksi,  
+			sum(qty*harga_jual) as biaya_jual
+			from tb_detail_pembelian 
+			JOIN tb_produk ON tb_produk.id = tb_detail_pembelian.id_produk 
+			JOIN tb_pembelian ON tb_pembelian.id = tb_detail_pembelian.id_pembelian 
+			WHERE (tb_pembelian.`status` ='1' or tb_pembelian.`status` ='2' or tb_pembelian.`status` ='3') 
+			and (DATE_FORMAT(tb_pembelian.created_at,'%Y-%m-%d') >= '$date_start' and DATE_FORMAT(tb_pembelian.created_at,'%Y-%m-%d') <= '$date_end') 
+			");
+		} else {
+			$query = $this->db->query("select
+			sum(qty*harga_produksi) as biaya_produksi,  
+			sum(qty*harga_jual) as biaya_jual
+			from tb_detail_pembelian 
+			JOIN tb_produk ON tb_produk.id = tb_detail_pembelian.id_produk 
+			JOIN tb_pembelian ON tb_pembelian.id = tb_detail_pembelian.id_pembelian 
+			WHERE (tb_pembelian.`status` ='1' or tb_pembelian.`status` ='2' or tb_pembelian.`status` ='3') and tb_produk.id_kategori = $category 
+			and (DATE_FORMAT(tb_pembelian.created_at,'%Y-%m-%d') >= '$date_start' and DATE_FORMAT(tb_pembelian.created_at,'%Y-%m-%d') <= '$date_end') "); 
+		}
 
 		return $query->row();
 	}

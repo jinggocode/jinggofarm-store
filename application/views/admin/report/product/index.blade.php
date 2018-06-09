@@ -33,7 +33,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <input value="{{(isset($date))?$date:''}}" name="date" type="text" class="form-control pull-right" id="reservation" required>
+                    <input name="date" type="text" class="form-control pull-right" id="reservation" required>
                 </div>
                 <button type="submit" name="action" value="submit" class="btn btn-info"><i class="fa fa-eye"></i> Lihat</button>
             
@@ -50,7 +50,7 @@
 
     <br> @if ($action == "") @else
 
-    <h4>{{dateFormatBulan(4, $newDateFormat)}}</h4>
+    <h4>{{dateFormatBulan(4, $date_start).' sampai '.dateFormatBulan(4, $date_end)}}</h4>
     <div class="box">
         <!-- Table Styles Block -->
         <div class="block">
@@ -74,6 +74,7 @@
                             <th>No.</th>
                             <th>Nama Produk</th>
                             <th>Jumlah Terjual</th>
+                            <th>Keuntungan</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -87,12 +88,13 @@
                             <td>{{$no++}}.</td>
                             <td>{{$row->nama}}</td>
                             <td>{{$row->jumlah}}</td>
+                            <td>{{money($row->profit)}}</td>
                         </tr>
                         @endforeach
                         <?php endif ?>
                         <tr>
-                            <td colspan="2" align="right">TOTAL PENJUALAN</td>
-                            <td><b>{{$total->total}}</b></td>
+                            <td colspan="3" align="right">TOTAL KEUNTUNGAN</td>
+                            <td><b>{{money($total_profit)}}</b></td>
                         </tr>
                     </tbody>
                 </table>
