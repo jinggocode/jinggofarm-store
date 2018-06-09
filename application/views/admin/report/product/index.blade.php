@@ -5,6 +5,9 @@
 @section('style')
 <!-- bootstrap datepicker -->
 <link rel="stylesheet" href="https://adminlte.io/themes/AdminLTE/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+
+<!-- daterange picker -->
+<link rel="stylesheet" href="https://adminlte.io/themes/AdminLTE/bower_components/bootstrap-daterangepicker/daterangepicker.css">
 @endsection
  
 @section('content')
@@ -30,15 +33,19 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <input value="{{(isset($date))?$date:''}}" name="date" type="text" class="form-control pull-right" id="datepicker" data-date-format='dd-mm-yyyy' required>
+                    <input value="{{(isset($date))?$date:''}}" name="date" type="text" class="form-control pull-right" id="reservation" required>
                 </div>
                 <button type="submit" name="action" value="submit" class="btn btn-info"><i class="fa fa-eye"></i> Lihat</button>
             
             </form>
         </div>
+        
+        @if ($action == "") @else
         <div class="col-lg-6 col-md-6" align="right">
             <a href="{{site_url('admin/report/product/cetak?category='.$category_select.'&date='.$date)}}" target="_BLANK" class="btn btn-primary"><i class="fa fa-print"></i> Cetak</a>
         </div>
+        @endif
+
     </div>
 
     <br> @if ($action == "") @else
@@ -105,14 +112,20 @@
 <!-- bootstrap datepicker -->
 <script src="https://adminlte.io/themes/AdminLTE/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 
+<script src="https://adminlte.io/themes/AdminLTE/bower_components/moment/min/moment.min.js"></script>
+<script src="https://adminlte.io/themes/AdminLTE/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+
 <script>
-    $(function () {
+$(function () {
     //Date picker
     $('#datepicker').datepicker({
-      autoclose: true,
-      dateFormat: 'yy-mm-dd'
+        autoclose: true,
+        dateFormat: 'yy-mm-dd'
     })
-  })
+ 
+    //Date range picker
+    $('#reservation').daterangepicker() 
+})
 
 </script>
 @endsection
