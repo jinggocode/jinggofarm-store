@@ -134,11 +134,35 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
             case 4: // Senin, 12 Maret 2017
             return $hari[date('w', $tanggal)].', '.$tgl[0] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
             break;
+            
+            case 5:
+            return 'asd';
 
             default:
             return $split[2] . ', ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
             break;
         }
+      }
+    }
+
+    if ( ! function_exists('bulan'))
+    {
+      function bulan($bulan_int) {
+        $bulan_angka = (int)$bulan_int;
+        $bulan = array (1 =>   'Januari',
+              'Februari',
+              'Maret',
+              'April',
+              'Mei',
+              'Juni',
+              'Juli',
+              'Agustus',
+              'September',
+              'Oktober',
+              'November',
+              'Desember'
+            ); 
+        return $bulan[$bulan_angka];
       }
     }
 

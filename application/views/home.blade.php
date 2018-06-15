@@ -78,10 +78,10 @@
 <section style="background: url({{base_url('assets/image/sapi.jpg')}});" class="divider">
   <div class="container"> 
     <div class="row">
-      <div class="col-lg-6">
-        <p>Old Collection</p>
-        <h2 class="h1 text-uppercase no-margin">Huge Sales</h2>
-        <p>At our outlet stores</p><a href="#" class="btn btn-template wide shop-now">Shop Now<i class="icon-bag"></i></a>
+      <div class="col-lg-9">
+        <p>Investasi untuk masa depan?</p>
+        <h2 class="h1 text-uppercase no-margin">Coba Investasi Sapi Perah</h2>
+        <a href="https://i-cow.id" class="btn btn-template wide shop-now">Pelajari Sekarang<i class="icon-info"></i></a>
       </div>
     </div>
   </div>

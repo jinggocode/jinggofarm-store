@@ -40,9 +40,13 @@
                 </div>
                 <button type="submit" name="action" value="submit" class="btn btn-info"><i class="fa fa-eye"></i> Lihat</button>
         </div>
-        <div class="col-lg-6 col-md-6" align="right">
-            </form>
+            </form> 
+        
+        @if ($action == "") @else
+        <div class="col-lg-6 col-md-6" align="right">  
+            <a href="{{site_url('admin/report/profit/cetak?month='.$month.'&year='.$year)}}" target="_BLANK" class="btn btn-primary"><i class="fa fa-print"></i> Cetak</a>
         </div>
+        @endif
     </div>
 
     <br> @if ($action == "") @else
