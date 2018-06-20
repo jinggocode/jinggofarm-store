@@ -59,8 +59,7 @@ class Product extends MY_Controller
 			'category' => $this->category_model->get_all(),
 			'pagination' => $this->pagination->create_links(),
 			'total_rows' => $config['total_rows'],
-			'start' => $start,
-			'filter' => $this->session->userdata('filter_cattle'),
+			'start' => $start, 
 			'page' => $this->uri->segment(2),
 		);
 
@@ -70,7 +69,7 @@ class Product extends MY_Controller
 	{
 		$search_data = $this->input->get();
 
-		$data = $this->product_model->search($search_data);
+		$data = $this->product_model->search($search_data); 
 
 		$this->generateCsrf();
 		$this->render('product/index', $data);

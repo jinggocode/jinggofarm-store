@@ -24,11 +24,22 @@
     <div class="row">
       <!-- Grid -->
       <div class="products-grid col-12 sidebar-none">
-        <header class="d-flex justify-content-between align-items-start"><span class="visible-items">Menampilkan <strong>1-10 </strong>dari <strong>{{$total_rows}} </strong>data</span>
-
-          <form action="{{site_url('product/search')}}">
-             
-            <input type="hidden" name="keyword">
+        
+        <form action="{{site_url('product/search')}}">
+        <div class="row pb-3">
+          
+          <!-- form Pencarian -->
+          <div class="col-md-4">
+            <div class="row"> 
+                <div class="col-md-9" style="padding-right: 0px">
+                    <input value="{{($search_data['keyword'] != "")?$search_data['keyword']:""}}" type="text" name="keyword" class="form-control" placeholder="Pencarian Produk">
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-primary pb-2 pt-2" style="padding-top: 11px !important; padding-bottom: 11px !important" type="submit">Cari</button>
+                </div>
+            </div>
+          </div>
+          <div class="col-md-8 text-right">
             <select id="kategori" name="category" class="bs-select" onchange="this.form.submit();">
               <option value="">-Semua Kategori-</option>
               @foreach ($category as $value) 
@@ -41,23 +52,32 @@
               <option {{(isset($search_data['sort'])&& $search_data['sort'] == '3')?'selected':''}} value="3">Harga Terendah</option>
               <option {{(isset($search_data['sort'])&& $search_data['sort'] == '4')?'selected':''}} value="4">Harga Tinggi</option>
             </select>
-          </form>
-        </header>
-        <div class="row">
-
-          @foreach ($data as $row) 
-          <div class="col-xl-3 col-lg-4 col-md-6" style="display: flex; padding: 20px">
-            <div class="card card-hover" style="width: 18rem; cursor: pointer;" onclick="window.location.href='{{site_url('product/detail/'.$row->id.'/'.$row->slug)}}'"> 
-              <img class="card-img-top" src="{{base_url('uploads/product/'.$row->foto)}}" alt="Card image cap">
-              <div class="card-body">
-                <label style="font-size: 13px; margin-bottom: -2px">{{$row->kategori->nama}}</label>
-                <h5 class="card-title" style="margin-bottom: -2px">{{$row->nama}}</h5>
-                <span class="badge badge-primary" style="margin-bottom: 13px">Tersedia</span>
-                <p class="card-text" style="font-size: 20px">{{money($row->harga_jual)}}</p>
-              </div> 
-            </div>
           </div>
-          @endforeach 
+
+        </div> 
+        </form>
+
+        <div class="row">
+          
+          @if ($data == FALSE)
+            <div class="col-md-12">
+                <p class="text-center">- Tidak ada data -</p>
+            </div>
+          @else
+            @foreach ($data as $row) 
+            <div class="col-xl-3 col-lg-4 col-md-6" style="display: flex; padding: 20px">
+              <div class="card card-hover" style="width: 18rem; cursor: pointer;" onclick="window.location.href='{{site_url('product/detail/'.$row->id.'/'.$row->slug)}}'"> 
+                <img class="card-img-top" src="{{base_url('uploads/product/'.$row->foto)}}" alt="Card image cap">
+                <div class="card-body">
+                  <label style="font-size: 13px; margin-bottom: -2px">{{$row->kategori->nama}}</label>
+                  <h5 class="card-title" style="margin-bottom: -2px">{{$row->nama}}</h5>
+                  <span class="badge badge-primary" style="margin-bottom: 13px">Tersedia</span>
+                  <p class="card-text" style="font-size: 20px">{{money($row->harga_jual)}}</p>
+                </div> 
+              </div>
+            </div>
+            @endforeach 
+          @endif
 
         </div>
         <nav aria-label="page navigation example" class="d-flex justify-content-center">
