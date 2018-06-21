@@ -1,6 +1,6 @@
 @layout('_layout/front/index')
 
-@section('title'){{$data->kategori->nama.' - '.$data->judul}}@endsection
+@section('title'){{$data->judul}} @endsection
 
 @section('content') 
     <!-- Hero Section-->

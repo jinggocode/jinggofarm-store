@@ -32,7 +32,7 @@
           <div class="col-md-4">
             <div class="row"> 
                 <div class="col-md-9" style="padding-right: 0px">
-                    <input value="{{($search_data['keyword'] != "")?$search_data['keyword']:""}}" type="text" name="keyword" class="form-control" placeholder="Pencarian Produk">
+                    <input value="{{(isset($search_data['keyword']))?$search_data['keyword']:""}}" type="text" name="keyword" class="form-control" placeholder="Pencarian Produk">
                 </div>
                 <div class="col-md-3">
                     <button class="btn btn-primary pb-2 pt-2" style="padding-top: 11px !important; padding-bottom: 11px !important" type="submit">Cari</button>
