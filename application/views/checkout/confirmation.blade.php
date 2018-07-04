@@ -53,7 +53,7 @@
                           </div>
                           <div class="form-group col-md-12">
                             <label for="foto" class="form-label">Foto Bukti (.png atau .jpg)</label>
-                            <input type="file" required="required" value="{{set_value('email')}}" id="foto" type="text" name="foto" class="form-control">
+                            <input type="file" required="required" value="{{set_value('foto')}}" id="foto" type="text" name="foto" class="form-control">
                           </div>
                         </div>
                         <div class="col-md-6">

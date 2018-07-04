@@ -150,7 +150,7 @@ class User extends MY_Controller
 				echo "ada kesalahan";
 			} else {
 				$this->message('Data berhasi di Simpan!', 'success');
-				$this->go('auth/sign_in'); //redirect ke user
+				$this->go('auth/sign_up'); //redirect ke user
 			}
 		}
 	}

@@ -68,8 +68,7 @@
                       {{($row->status == '2')?'<span class="label label-warning">Menunggu Resi</span>':''}}
                       {{($row->status == '3')?'<span class="label label-success">Resi Terkirim</span>':''}}
                     </td>
-                    <td>
-                      <a href="{{site_url('admin/'.$page.'/view/'.$row->id)}}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> Lihat</a>
+                    <td> 
                       <a data-id="{{$row->id}}" data-kode="{{$row->kode_pembelian}}" class="open-kirimResiDialog btn btn-warning btn-sm" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-pencil-square-o"></i> Kirim Resi</a>
                       <a href="{{site_url('admin/'.$page.'/delete/'.$row->id)}}" onclick="return confirm('apakah anda yakin?')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</a>
                     </td>

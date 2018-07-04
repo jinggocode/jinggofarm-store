@@ -59,8 +59,7 @@
                   <tr>
                     <td>{{$start++}}.</td>
                     <td>{{$row->nama}}</td>
-                    <td>
-                      <a href="{{site_url('admin/'.$page.'/view/'.$row->id)}}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> Lihat</a>
+                    <td> 
                       <a href="{{site_url('admin/'.$page.'/edit/'.$row->id)}}" class="btn btn-warning btn-sm"><i class="fa fa-pencil-square-o"></i> Edit</a>
                       <a href="{{site_url('admin/'.$page.'/delete/'.$row->id)}}" onclick="return confirm('apakah anda yakin?')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</a>
                     </td>
