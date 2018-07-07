@@ -65,7 +65,7 @@ class Checkout2 extends MY_Controller
 			$this->render('checkout2/address', $data);
 		} else {
 			$data['user'] = $this->ion_auth->user()->row();
-			$this->render('checkout/address-login', $data);
+			$this->render('checkout2/address', $data);
 		}
 	}
 	public function payment($id)

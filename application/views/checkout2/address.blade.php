@@ -31,6 +31,8 @@
         </ul>
         <div class="tab-content">
           <div id="address" class="active tab-block">
+            @if (!$this->ion_auth->logged_in())
+                
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <li class="nav-item">
                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Beli tanpa Daftar</a>
@@ -39,6 +41,8 @@
                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Login / Daftar</a>
               </li>
             </ul>
+
+            @endif
             <div class="tab-content" id="myTabContent">
               <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
@@ -60,7 +64,7 @@
                       <h4>Identitas</h4>
                     </div>
                     <div class="form-group col-md-6">
-                      <label for="first_name" class="form-label">Nama {{$qty}}</label>
+                      <label for="first_name" class="form-label">Nama</label>
                       <input required="required" value="{{set_value('first_name')}}" id="first_name" type="text" name="first_name" placeholder="Masukkan nama anda" class="form-control">
                     </div>
                     <div class="form-group col-md-6">

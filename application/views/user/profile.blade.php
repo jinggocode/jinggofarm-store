@@ -126,7 +126,7 @@ $(document).ready(function(){
   });
 
   var prov = $('#provinsi').val();
-  var kab  = <?php echo $user->kabupaten_id; ?>;
+  var kab  = '<?php echo $user->kabupaten_id; ?>';
   if (prov != '') {
       $.ajax({
           type : 'GET',
