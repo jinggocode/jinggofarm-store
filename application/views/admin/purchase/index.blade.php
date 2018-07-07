@@ -68,8 +68,9 @@
                       {{($row->status == '2')?'<span class="label label-warning">Menunggu Resi</span>':''}}
                       {{($row->status == '3')?'<span class="label label-success">Resi Terkirim</span>':''}}
                     </td>
-                    <td> 
-                      <a data-id="{{$row->id}}" data-kode="{{$row->kode_pembelian}}" class="open-kirimResiDialog btn btn-warning btn-sm" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-pencil-square-o"></i> Kirim Resi</a>
+                    <td>  
+                       
+                      <a href="{{site_url('admin/'.$page.'/view/'.$row->id)}}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> Detail</a>
                       <a href="{{site_url('admin/'.$page.'/delete/'.$row->id)}}" onclick="return confirm('apakah anda yakin?')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</a>
                     </td>
                   </tr>
@@ -128,6 +129,7 @@
             <th>No.</th>
             <th>Nama Rekening</th>
             <th>Nomor Rekening</th>
+            <th>Jumlah Bayar</th>
             <th>Bukti</th>
             <th>Aksi</th>
           </thead>
@@ -143,6 +145,7 @@
                   <td>{{$no++}}.</td>
                   <td>{{$val->nama_rek}}</td>
                   <td>{{$val->no_rek}}</td>
+                  <td>{{money($val->pembelian->jumlah_bayar + $val->pembelian->biaya_kirim)}}</td>
                   <td><a target="_blank" href="{{site_url('uploads/bukti-transfer/'.$val->foto)}}" class="btn btn-warning btn-sm"><i class="fa fa-file-image-o"></i> Foto</a></td>
                   <td>
                     <a href="{{site_url('admin/purchase/valid/'.$val->id)}}" class="btn btn-primary btn-sm" onclick="return confirm('Apakah anda yakin?');"><i class="fa fa-check-circle-o"></i> Valid</a>

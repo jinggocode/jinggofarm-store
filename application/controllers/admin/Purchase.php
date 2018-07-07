@@ -64,7 +64,7 @@ class Purchase extends MY_Controller
 
 		$data = array(
 			'data' => $data,
-			'validasi_transfer' => $this->evidence_model->where('status', '0')->get_all(),
+			'validasi_transfer' => $this->evidence_model->with_pembelian()->where('status', '0')->get_all(),
 			'jumlah_transfer' => $this->evidence_model->where('status', '0')->count_rows(),
 			'pagination' => $this->pagination->create_links(),
 			'total_rows' => $config['total_rows'],
@@ -98,7 +98,8 @@ class Purchase extends MY_Controller
 
 	public function view($id)
 	{
-		$data['data'] = $this->purchase_model->get($id);
+		$data['data'] = $this->purchase_model->get($id); 
+		$data['list_pembelian'] = $this->purchase_detail_model->with_product()->where('id_pembelian', $id)->get_all();
 
 		$data['page'] = $this->uri->segment(2);
 		$this->render('admin/purchase/view', $data);

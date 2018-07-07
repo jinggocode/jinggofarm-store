@@ -21,6 +21,12 @@
       <span>Segera lakukan pembayaran sebelum <b>{{dateFormatBulan(3, $pembelian->batas_bayar)}}</b></span>
     </div>
 
+    <div class="py-3" align="center">
+        <div class="alert alert-primary">
+          <h4>Kode Order : {{$pembelian->kode_pembelian}}</h4>
+        </div>
+    </div>
+
     <div class="row">
       <div class="col-lg-8">
         <ul class="nav nav-pills">

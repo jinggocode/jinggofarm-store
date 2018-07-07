@@ -136,7 +136,7 @@ class User extends MY_Controller
 		$this->form_validation->set_rules('reenter_password', 'Konfirmasi Password', 'trim|required|matches[password]');
 
 		if ($this->form_validation->run() == FALSE) {
-			$this->generateCsrf();
+			$this->generateCsrf(); 
 			$this->render('user/sign_up');
 		} else {
 			$data = $this->input->post();
@@ -150,7 +150,7 @@ class User extends MY_Controller
 				echo "ada kesalahan";
 			} else {
 				$this->message('Data berhasi di Simpan!', 'success');
-				$this->go('auth/sign_up'); //redirect ke user
+				$this->go('auth/sign_in'); //redirect ke user
 			}
 		}
 	}

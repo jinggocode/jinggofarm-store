@@ -53,6 +53,7 @@
                   {{$csrf}}
                   {{form_hidden('qty', $qty)}}
                   {{form_hidden('id_produk', $id_produk)}}
+                  {{form_hidden('tipe_beli', '1')}}
 
                   <div class="row">
                     <div class="form-group col-md-12 pl-4 ml-2">

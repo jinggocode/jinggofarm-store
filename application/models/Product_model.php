@@ -51,10 +51,10 @@ class Product_model extends MY_Model
         	$sort_with = 'ASC';	
         } else if ($search_data['sort'] == 3) {
         	$sort_by   = 'harga_jual';
-        	$sort_with = 'DESC';	
+        	$sort_with = 'ASC';	
         } else if ($search_data['sort'] == 4) {
         	$sort_by   = 'harga_jual';
-        	$sort_with = 'ASC';	
+        	$sort_with = 'DESC';	
         } else {  
         	$sort_by   = '';
         	$sort_with = '';

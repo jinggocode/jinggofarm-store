@@ -10,6 +10,7 @@ class Evidence_model extends MY_Model
         $this->primary_key = 'id'; 
         $this->protected = array('id');
 
+		$this->has_one['pembelian'] = array('Purchase_model', 'id', 'id_pembelian');
 		parent::__construct();
 	}   
 }

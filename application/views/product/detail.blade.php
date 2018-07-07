@@ -30,8 +30,10 @@
             <div class="ribbon-primary text-uppercase">Tersedia</div>
         @endif
 
-        <div class="items-slider" style="padding: 0px">
-          <div class="item"><img src="{{base_url('uploads/product/'.$data->foto)}}" alt="shirt"></div> 
+        <div class="item-slider" style="padding: 0px;"> 
+          <div class="items">
+            <img src="{{base_url('uploads/product/'.$data->foto)}}" width="350" alt="shirt">
+          </div> 
         </div> 
       </div>
       <div class="details col-lg-8">

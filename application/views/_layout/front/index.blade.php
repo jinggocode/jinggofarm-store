@@ -2,13 +2,13 @@
 <?php
 $page     = $this->uri->segment(1);
 $sub_page = $this->uri->segment(2);
-if ($page == 'user' && $sub_page != "sign_up") {
-  if (!$this->ion_auth->logged_in())
-  {
-    // redirect them to the login page
-    redirect('auth/sign_in', 'refresh');
-  }
-}
+// if ($page == 'user' && $sub_page != "sign_up") {
+//   if (!$this->ion_auth->logged_in())
+//   {
+//     // redirect them to the login page
+//     redirect('auth/sign_in', 'refresh');
+//   }
+// }
 ?>
 
 <!DOCTYPE html>

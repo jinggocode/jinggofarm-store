@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="{{base_url('assets/pelanggan/')}}css/custom.css">
 
     <!-- Favicon-->
-    <link rel="shortcut icon" href="https://d19m59y37dris4.cloudfront.net/hub/1-3-0/img/favicon.ico">
+    <link rel="shortcut icon" href="{{base_url('assets/image/logo1.png')}}">
     <!-- Modernizr-->
     <script src="https://d19m59y37dris4.cloudfront.net/hub/1-3-0/js/modernizr.custom.79639.js"></script>
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>

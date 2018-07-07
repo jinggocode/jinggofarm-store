@@ -11,8 +11,9 @@ class article extends MY_Controller
 		parent::__construct();
 		$this->_accessable = TRUE;
 		$this->load->helper(array('dump','utility'));  
-        $this->load->model('article_model');  
+        $this->load->model('pelanggan/article_model');  
 		$this->load->model('product_model');  
+		$this->load->model('category_article_model');  
 		$this->load->library('cart');
 	}
 
@@ -54,7 +55,8 @@ class article extends MY_Controller
         $this->pagination->initialize($config);
 
         $data = array( 
-        	'data' => $data,  
+			'data' => $data,  
+			'category' => $this->category_article_model->get_all(),
             'pagination' => $this->pagination->create_links(),
             'total_rows' => $config['total_rows'], 
             'start' => $start,  

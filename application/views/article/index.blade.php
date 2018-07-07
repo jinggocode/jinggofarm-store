@@ -21,6 +21,30 @@
 </section>
 <section class="blog">
   <div class="container">
+
+    <form action="{{site_url('article/search')}}">
+      <div class="row pb-3">
+        
+        <!-- form Pencarian -->
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-8 text-right">
+          <select id="kategori" name="category" class="bs-select" onchange="this.form.submit();">
+            <option value="">-Semua Kategori-</option>
+            @foreach ($category as $value) 
+              <option {{(isset($search_data['category'])&& $search_data['category'] == $value->id)?'selected':''}} value="{{$value->id}}">{{$value->nama}}</option> 
+            @endforeach
+          </select>
+          <select id="sorting" name="sort" class="bs-select" onchange="this.form.submit();">
+            <option {{(isset($search_data['sort'])&& $search_data['sort'] == '1')?'selected':''}} value="1">Terbaru</option>
+            <option {{(isset($search_data['sort'])&& $search_data['sort'] == '2')?'selected':''}} value="2">Terlama</option> 
+          </select>
+        </div>
+
+      </div> 
+    </form>
+      
     <div class="row">
 
       <!-- post-->

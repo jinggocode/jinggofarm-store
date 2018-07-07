@@ -20,6 +20,9 @@ class Purchase extends MY_Controller
 			$kode = $this->input->get('kode');
 			$purchase = $this->purchase_model->where('kode_pembelian', $kode)->get();
 			$id = $purchase->id;
+			if ($purchase->status == '0') {
+				$this->go('checkout/payment/'.$id);
+			}
 		} else {
 			$purchase = $this->purchase_model->get($id);
 		}
@@ -51,10 +54,14 @@ class Purchase extends MY_Controller
 
 	public function checking_transaction()
 	{
-		$transaksi = $this->purchase_model->where('status', '0')->get_all();
-
-		foreach ($transaksi as $value) {
-			$this->purchase_model->checkTime($value->batas_bayar, $value->id);
+		$transaksi = $this->purchase_model->where('status', '0')->get_all(); 
+		if ($transaksi) {
+			foreach ($transaksi as $value) {
+				$this->purchase_model->checkTime($value->batas_bayar, $value->id);
+			}
+			echo "Berhasil di cek";
+		} else {
+			echo "Tidak ada Tranksaksi";
 		}
 	}
 
