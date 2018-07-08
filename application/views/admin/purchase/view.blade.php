@@ -38,10 +38,14 @@
               <td>Biaya Kirim</td>
               <td>{{money($data->biaya_kirim)}}</td>
             </tr> 
+            @if ($data->status == '2')
             <tr>
               <td>Aksi</td>
-              <td><a data-id="{{$data->id}}" data-kode="{{$data->kode_pembelian}}" class="open-kirimResiDialog btn btn-warning btn-sm" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-pencil-square-o"></i> Kirim Resi</a></td>
+              <td>
+                <a data-id="{{$data->id}}" data-kode="{{$data->kode_pembelian}}" class="open-kirimResiDialog btn btn-warning btn-sm" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-pencil-square-o"></i> Kirim Resi</a> 
+              </td>
             </tr> 
+            @endif
           </table> 
         </div>
         <div class="col-md-8">
@@ -101,7 +105,8 @@
       <div class="modal-body">
         <form action="{{site_url('admin/purchase/kirim_resi')}}" method="post">
           {{$csrf}}
-          <input type="hidden" name="id" id="idP" value="">
+          <input type="hidden" name="id" id="idP" value="{{$data->id}}">
+
           <div class="form-group">
             <label for="no_resi">No. Resi</label>
             <input type="text" name="no_resi" class="form-control" id="no_resi">
