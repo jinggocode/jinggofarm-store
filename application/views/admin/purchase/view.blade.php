@@ -32,7 +32,7 @@
             </tr>
             <tr>
               <td>Kurir</td>
-              <td>{{(empty($data->kurir))?'Bali Prima':''}}</td>
+              <td>{{(empty($data->kurir))?'Bali Prima':strtoupper($data->kurir)}}</td>
             </tr>
             <tr>
               <td>Biaya Kirim</td>

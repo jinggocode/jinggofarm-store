@@ -102,6 +102,7 @@ class Purchase extends MY_Controller
 		$data['list_pembelian'] = $this->purchase_detail_model->with_product()->where('id_pembelian', $id)->get_all();
 
 		$data['page'] = $this->uri->segment(2);
+		$this->generateCsrf();
 		$this->render('admin/purchase/view', $data);
 	}
 
