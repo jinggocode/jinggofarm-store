@@ -71,7 +71,7 @@
                 <div class="card-body">
                   <label style="font-size: 13px; margin-bottom: -2px">{{$row->kategori->nama}}</label>
                   <h5 class="card-title" style="margin-bottom: -2px">{{$row->nama}}</h5>
-                  @if ($row->sisa_stok == 0)
+                  @if (cek_stok($row->id) == 0)
                     <span class="badge badge-danger" style="margin-bottom: 13px">Stok Habis</span> 
                   @else
                     <span class="badge badge-primary" style="margin-bottom: 13px">Tersedia</span>

@@ -24,7 +24,7 @@
   <div class="container">
     <div class="row">
       <div class="product-images col-lg-4">
-        @if ($data->sisa_stok == 0)
+        @if (cek_stok($data->id) == '0')
             <div class="ribbon-danger text-uppercase">Stok Habis</div>
         @else
             <div class="ribbon-primary text-uppercase">Tersedia</div>
@@ -40,18 +40,18 @@
         <div class="d-flex align-items-center justify-content-between flex-column flex-sm-row mb-4">
           <ul class="price list-inline no-margin">
             <li class="list-inline-item current" style="font-size: 40px">{{money($data->harga_jual)}}</li> {{($data->nama == "Susu Segar")?'per Liter':''}}
-            <li class="list-item">Tersedia <b>{{$data->sisa_stok}}</b> {{($data->nama == "Susu Segar")?'Liter':'Buah'}}</li>
+            <li class="list-item">Tersedia <b>{{cek_stok($data->id)}}</b> {{($data->nama == "Susu Segar")?'Liter':'Buah'}}</li>
           </ul>
         </div>
 
-        @if ($data->sisa_stok == 0)
+        @if (cek_stok($data->id) == '0')
 
         @else
           @if ($data->opsi_kirim == '0')
             <div class="d-flex align-items-center justify-content-between flex-column flex-sm-row mb-4">
               <ul class="price list-inline no-margin">
                 <li class="list-inline-item current" style="font-size: 40px">
-                  <input id="qty" class="form-control col-12" type="number" value="1" min="1" max="{{$data->sisa_stok}}">
+                  <input id="qty" class="form-control col-12" type="number" value="1" min="1" max="{{cek_stok($data->id)}}">
                 </li>
                 <li class="list-inline-item">
                   <button data-productid="{{$data->id}}" data-productname="{{$data->nama}}" data-productprice="{{$data->harga_jual}}" data-weight="{{$data->berat}}" data-image="{{base_url('uploads/product/'.$data->foto)}}" class="btn btn-template wide add_cart"> <i class="icon-cart"></i>Beli</button>
@@ -66,7 +66,7 @@
 
                 <ul class="price list-inline no-margin">
                   <li class="list-inline-item current" style="font-size: 40px">
-                    <input name="qty" class="form-control col-12" type="number" value="5" min="5" max="{{$data->sisa_stok}}">
+                    <input name="qty" class="form-control col-12" type="number" value="5" min="5" max="{{cek_stok($data->id)}}">
                   </li> <span class="mr-4">Liter</span>
                   <li class="list-inline-item">
                     <button type="submit" class="btn btn-template wide"> <i class="icon-cart"></i>Pesan Sekarang</button>
@@ -188,7 +188,7 @@
             var weight_product= parseInt($(this).data("weight"));
             var quantity      = parseInt($("#qty").val());
             var weight        = weight_product * quantity;
-            var sisa_stok     = <?php echo $data->sisa_stok; ?>;
+            var sisa_stok     = <?php echo cek_stok($data->id); ?>;
 
             if (parseInt(sisa_stok) < parseInt(quantity)) {
               alert('Kesalahan memasukkan jumlah pembelian!');

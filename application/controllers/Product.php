@@ -10,7 +10,7 @@ class Product extends MY_Controller
 	{
 		parent::__construct();
 		$this->_accessable = true;
-		$this->load->helper(array('dump', 'utility'));
+		$this->load->helper(array('dump', 'utility', 'cek_stok'));
 		$this->load->model('product_model');
 		$this->load->model('category_model');
 		$this->load->model('testimoni_model');
@@ -50,7 +50,7 @@ class Product extends MY_Controller
 			->get_all();
 		$config['total_rows'] = $this->product_model
 			->count_rows();
-
+ 
 		$this->load->library('pagination');
 		$this->pagination->initialize($config);
 
