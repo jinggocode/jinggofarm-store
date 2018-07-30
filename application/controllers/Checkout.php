@@ -18,7 +18,7 @@ class Checkout extends MY_Controller
 	public function address($param = NULL)
 	{
 		if ($param == 'getKabupaten') {
-			$provinsi_id = $_GET['prov_id'];
+			$provinsi_id = $_GET['prov_id']; 
 			$data = $this->checkout_model->getKabupaten($provinsi_id);
 			for ($i=0; $i < count($data['rajaongkir']['results']); $i++) {
 				echo "<option value='".$data['rajaongkir']['results'][$i]['city_id']."'>".$data['rajaongkir']['results'][$i]['city_name']."</option>";
