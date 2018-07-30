@@ -121,8 +121,10 @@ class User extends MY_Controller
 
 	public function sign_up()
 	{
+		$data['provinsi'] = $this->checkout_model->getProvinsi();
+
 		$this->generateCsrf();
-		$this->render('user/sign_up');
+		$this->render('user/sign_up', $data);
 	}
 	public function save()
 	{

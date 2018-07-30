@@ -36,6 +36,26 @@
                 <input value="{{set_value('phone')}}" id="phone" name="phone" type="text" class="form-control">
               </div>
               <div class="form-group">
+                <label for="provinsi" class="form-label">Provinsi </label>
+                <select required="required" name="provinsi_id" id="provinsi" class="form-control" style="padding: 0.2rem 0.5rem;">
+                  <option value=""></option>
+
+                  <?php for ($i=0; $i < count($provinsi['rajaongkir']['results']); $i++) { ?>
+                  <option value="<?php echo $provinsi['rajaongkir']['results'][$i]['province_id']; ?>"><?php echo $provinsi['rajaongkir']['results'][$i]['province']; ?></option>
+                  <?php }?>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="kabupaten" class="form-label">Kota / Kabupaten</label>
+                <select required="required" name="kabupaten_id" id="kabupaten" class="form-control" style="padding: 0.2rem 0.5rem;">
+
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="detail_alamat" class="form-label">Detail Alamat</label>
+                <textarea required="required" name="detail_alamat" id="detail_alamat" cols="30" rows="3" class="form-control">{{set_value('detail_alamat')}}</textarea>
+              </div>
+              <div class="form-group">
                 <label for="password" class="form-label">Password</label>
                 <input value="{{set_value('password')}}" id="password" name="password" type="password" class="form-control">
               </div>
@@ -53,4 +73,37 @@
     </div>
   </div>
 </section>
+@endsection
+
+@section('script')
+<script>
+$(document).ready(function(){
+
+  $.ajaxSetup({
+      data: {
+          csrf_test_name: $.cookie('csrf_cookie_name')
+      }
+  });
+
+ 
+
+  $('#provinsi').change(function(){
+    //Mengambil value dari option select provinsi kemudian parameternya dikirim menggunakan ajax
+    var prov = $('#provinsi').val();
+    $.LoadingOverlay("show");
+
+    $.ajax({
+        type : 'GET',
+        url : '<?php echo base_url('checkout/address/getKabupaten'); ?>',
+        data :  'prov_id=' + prov,
+        success: function (data) {
+        $.LoadingOverlay("hide");
+        //jika data berhasil didapatkan, tampilkan ke dalam option select kabupaten
+        $("#kabupaten").html(data);
+      }
+    });
+  });
+ 
+});
+</script>
 @endsection
